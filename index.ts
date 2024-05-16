@@ -14,8 +14,10 @@ function readJoke():void{
             console.clear()
             console.log(`${joke.joke}`)
            
-            if(HTMLresponse) { 
-                HTMLresponse.innerHTML = `<br>${joke.joke}`}
+            const jokePlaceholder = document.querySelector("#jokePlaceholder");
+            if (jokePlaceholder) {
+                jokePlaceholder.textContent = joke.joke
+                }
                 
         })
         .catch((error: Error) => console.error('Error fetching joke:', error))

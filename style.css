@@ -1,0 +1,27 @@
+body {
+    background-image: url("./img/image2.png"); 
+    background-repeat: no-repeat; 
+    background-size:calc(40%); 
+    background-position: center bottom -160px;       
+}   
+
+.color {
+    background-color: rgb(33, 206, 206);
+    border: none;
+}
+.btn:hover{
+    background-color: rgb(33, 206, 206);
+    border: none; 
+}
+.card {
+   background-color: white !important;
+}
+
+.imagen {
+    opacity: 0.2 !important;
+}
+
+
+
+
+
