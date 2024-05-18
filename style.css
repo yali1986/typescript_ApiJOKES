@@ -21,6 +21,11 @@ body {
     opacity: 0.2 !important;
 }
 
+.btn-info {
+    padding: 2px 8px;
+    color: white;
+}
+
 
 
 
