@@ -10,29 +10,42 @@
 </head>
 <body>
     <div class="container container-fluid mt-5">
-        <p class="text-secondary"><strong>Avui: parcialment ennuvolat</p></strong>
-    <div class="card text-center w-50 mx-auto mt-5 border-0">
-        
-        <div class="card-body shadow-lg">
-          <h3 class="card-title my-4">Preparat per riure?🤣</h3>
-          <p class="card-text my-3 fs-5" id="jokePlaceholder"></p>
+          
+        <div class="temp">-°C</div>
+        <div class="summary">---</div>
+        <div class="location"></div>
+       
+        <div class="magicpatternUp w-25 ms-auto"></div>
+   
 
+    <div class="text-center mx-auto w-75 border-0 h-100">
+        
+        <div class="magicpattern p-5 w-100" style="position: relative; bottom: 11rem;">
+          <h5 class=" my-4 text-white pt-5">Preparat per riure?🤣</h5>
+          <div class="p-2">
+          <p class="my-3 fs-6 text-white p-2" id="jokePlaceholder"></p>
+        </div>
         <div class="mb-4">
-          <p class="display-flex; flex-direction: column; mb-0"><strong>Dóna una puntuació</strong></p>
-          <p class="display-flex; flex-direction: column; fs-6 mb-2">3 és la millor nota</p>
+       
+        
           <button class="btn btn-info color score-button" id="score1">1</button>
           <button class="btn btn-info color score-button" id="score2">2</button>
           <button class="btn btn-info color score-button" id="score3">3</button>
         </div>    
 
-          <button class="btn btn-primary color mb-4" id="nextButton">Següent acudit</button>
+          <button class="btn btn-primary color mb-4 text-black" id="nextButton">Següent acudit</button>
+         
         </div>
+        <div class="magicpatternDown w-25" style="position: absolute; top: 30rem"></div> 
         
       </div>
     
 
     <div id="app"></div><br><br>
 </div>
+
+<!-- Conexión api weather key:     d745881a8a1897a666f58641b5a627d2-->
+ <!-- dirección para generar el json: api.openweathermap.org/data/2.5/weather?id=524901&appid=YOUR_API_KEY-->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

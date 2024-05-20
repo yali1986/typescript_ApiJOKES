@@ -1,10 +1,54 @@
 "use strict";
 const API_URL = "https://icanhazdadjoke.com";
+//const API_URL_WEATHER: string = ""
 const nextButton = document.querySelector("#nextButton");
-// Inicializar el array de reportes de usuarios fuera de la función para que persista entre clicks
 const reportAcudits = [];
 // Variable para almacenar el chiste actual
 let currentJoke = null;
+//Weather
+let lon;
+let lat;
+let temperature = document.querySelector(".temp");
+let summary = document.querySelector(".summary");
+let loc = document.querySelector(".location");
+const kelvin = 273.15;
+// API Weather
+window.addEventListener("load", () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position);
+            lon = position.coords.longitude;
+            lat = position.coords.latitude;
+            // ID API
+            const api_id = "d745881a8a1897a666f58641b5a627d2";
+            const url_base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_id}`;
+            fetch(url_base)
+                .then(res => {
+                if (!res.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return res.json();
+            })
+                .then(data => {
+                console.log("Esta es la data");
+                console.log(data);
+                if (temperature && summary && loc) {
+                    temperature.textContent = Math.floor(data.main.temp - kelvin) + "°C";
+                    summary.textContent = data.weather[0].description;
+                    loc.textContent = data.name + ", " + data.sys.country;
+                }
+            })
+                .catch(error => {
+                console.error("Fetch error:", error);
+            });
+        }, error => {
+            console.error("Geolocation error:", error);
+        });
+    }
+    else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+});
 // Función para obtener y mostrar un chiste
 function readJoke() {
     fetch(API_URL, {
@@ -14,8 +58,8 @@ function readJoke() {
     })
         .then(res => res.json())
         .then((joke) => {
-        //console.clear();
         console.log(`${joke.joke}`);
+        //Imprimir por pantalla el chiste
         const jokePlaceholder = document.querySelector("#jokePlaceholder");
         if (jokePlaceholder) {
             jokePlaceholder.textContent = joke.joke;
@@ -27,14 +71,13 @@ function readJoke() {
     })
         .catch((error) => console.error('Error fetching joke:', error));
 }
-// Función para configurar los botones de puntuación
+// Función para los botones de puntuación
 function setupScoreButtons() {
     let score = null;
     const scoreButtons = document.querySelectorAll(".score-button");
     scoreButtons.forEach(button => {
         button.addEventListener("click", () => {
             score = parseInt(button.textContent);
-            //console.log(`Score actualizado a: ${score}`);
         });
     });
     // Guarda el reporte cada vez que se hace clic en "Siguiente chiste"
@@ -45,109 +88,16 @@ function setupScoreButtons() {
                 date: new Date().toISOString(),
                 score
             };
-            // Subida al array del report
             reportAcudits.push(report);
             // Visualización del reporte en consola
             console.log("Report d'acudits:", reportAcudits);
             // Resetea el score para el siguiente chiste
             score = null;
         }
-    }, { once: true });
+    }, { once: true }); // Cuando se añade un event listener con { once: true }, el listener se activará una sola vez y luego se eliminará automáticamente. 
+    //En este contexto se utiliza para asegurar que el listener, que agrega un reporte al array reportAcudits, se ejecute una sola vez por cada clic en el botón "Siguiente chiste".
 }
 if (nextButton) {
     nextButton.addEventListener("click", readJoke);
 }
-// Llama a readJoke al cargar la página por primera vez
 readJoke();
-// const API_URL:string = "https://icanhazdadjoke.com"
-// const nextButton:HTMLButtonElement | null = document.querySelector("#nextButton")
-// function readJoke() {
-//      fetch(API_URL, {
-//         headers: {
-//           "Accept": "application/json"    
-//         }
-//       })
-//         .then(res => res.json())
-//         .then((joke: {joke: string}) => {
-//             console.clear()
-//             console.log(`${joke.joke}`)
-//             const jokePlaceholder = document.querySelector("#jokePlaceholder");
-//             if (jokePlaceholder) {
-//                 jokePlaceholder.textContent = joke.joke
-//                 }
-//         })
-//         .catch((error: Error) => console.error('Error fetching joke:', error))
-// }
-// if(nextButton){
-//     nextButton.addEventListener("click", readJoke, generadorReports)
-// }
-// readJoke()
-// // necesito que este código se ejecute después del click en Seguent acudit
-// function generadorReports (){  
-// //declaración de score. El valor inicial es null
-// let score:number | null = null
-// //Array de reportes de usuarios
-// const reportAcudits: { joke: string; date: string; score: number | null; }[] = []
-// //selección de botones de score
-// const scoreButtons = document.querySelectorAll(".score-button")
-// //Iteración por botones de score. Si no hay evento de click tomará valor null establecido en la declaración
-//     scoreButtons.forEach(button => {
-//         button.addEventListener("click", () => {
-//             score = parseInt(button.textContent!)                    
-//         })
-//     })
-// //declaración de objeto report
-//      const report = {
-//         joke: "esta",
-//         date: new Date().toISOString(),
-//         score
-//     }
-//      //Subida al array del report
-//     reportAcudits.push(report)
-//     //Visualización
-//     console.log("Report d'acudits:", reportAcudits)
-// }
-// if(nextButton){
-//     nextButton.addEventListener("click", generadorReports)
-// }
-// // generadorReports ()
-// const API_URL:string = "https://icanhazdadjoke.com"
-// const nextButton:HTMLButtonElement | null = document.querySelector("#nextButton")
-// en este momento del desarrollo del código cuando el user evalúa un chiste está evaluando el chiste que saldrá en pantalla, no el que evaluó. 
-//De golpe se suben dos elementos al array vacío de reportAcudits
-// let score:number | null = null
-// const reportAcudits: { joke: string; date: string; score: number | null; }[] = []
-// function readJoke() {
-//      fetch(API_URL, {
-//         headers: {
-//           "Accept": "application/json"    
-//         }
-//       })
-//         .then(res => res.json())
-//         .then((joke: {joke: string}) => {
-//             console.clear()
-//             console.log(`${joke.joke}`)
-//             const scoreButtons = document.querySelectorAll(".score-button")
-//             scoreButtons.forEach(button => {
-//                 button.addEventListener("click", () => {
-//                     score = parseInt(button.textContent!)                    
-//                 })
-//             })
-//              const acudit = {
-//                 joke: joke.joke,
-//                 date: new Date().toISOString(),
-//                 score
-//             }
-//             reportAcudits.push(acudit)
-//             console.log("Report d'acudits:", reportAcudits)
-//             const jokePlaceholder = document.querySelector("#jokePlaceholder");
-//             if (jokePlaceholder) {
-//                 jokePlaceholder.textContent = joke.joke
-//                 }
-//         })
-//         .catch((error: Error) => console.error('Error fetching joke:', error))
-// }
-// if(nextButton){
-//     nextButton.addEventListener("click", readJoke)
-// }
-// readJoke()
