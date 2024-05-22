@@ -2,6 +2,9 @@ const API_URL_JOKES: string = "https://icanhazdadjoke.com"
 const API_URL_CHUCK: string = "https://api.chucknorris.io/jokes/random"
 const nextButton: HTMLButtonElement | null = document.querySelector("#nextButton")
 
+let iconoAnimado: HTMLImageElement | null = document.getElementById("icono-animado") as HTMLImageElement
+
+
 const reportAcudits: { joke: string; date: string; score: number | null; }[] = []
 
 // Variable para almacenar el chiste actual
@@ -41,20 +44,46 @@ window.addEventListener("load", () => {
                 })
                 .then(data => {                  
 
-                    if (temperature && summary && loc && weatherIcon) {
-                        temperature.textContent = Math.floor(data.main.temp) + "°C"
-                        summary.textContent = data.weather[0].description
-                        loc.textContent = data.name + ", " + data.sys.country  
+                   
+                    if (temperature && iconoAnimado) {
+                        temperature.textContent = Math.floor(data.main.temp) + "°C"                 
                         
-
-                        //icono del tiempo
                         
-                        let iconCode = data.weather[0].icon
-                        let urlIcono = `https://openweathermap.org/img/wn/${iconCode}.png`   
+                        switch (data.weather[0].main) {
+                            case 'Thunderstorm':
+                              iconoAnimado.src='animated/thunder.svg'
+                              console.log('TORMENTA');
+                              break;
+                            case 'Drizzle':
+                              iconoAnimado.src='animated/rainy-2.svg'
+                              console.log('LLOVIZNA');
+                              break;
+                            case 'Rain':
+                              iconoAnimado.src='animated/rainy-7.svg'
+                              console.log('LLUVIA');
+                              break;
+                            case 'Snow':
+                              iconoAnimado.src='animated/snowy-6.svg'
+                                console.log('NIEVE');
+                              break;                        
+                            case 'Clear':
+                                iconoAnimado.src='animated/day.svg'
+                                console.log('LIMPIO');
+                              break;
+                            case 'Atmosphere':
+                              iconoAnimado.src='animated/weather.svg'
+                                console.log('ATMOSFERA');
+                                break;  
+                            case 'Clouds':
+                                iconoAnimado.src='animated/cloudy-day-1.svg'
+                                console.log('NUBES');
+                                break;  
+                            default:
+                              iconoAnimado.src='animated/cloudy-day-1.svg'
+                              console.log('por defecto');
+                          }
 
-                        weatherIcon.src = urlIcono                        
-                       
-                        weatherIcon.alt = data.weather[0].description                      
+                        
                     
                     } else {
                         console.error("Uno o más elementos del DOM no se encontraron.")
