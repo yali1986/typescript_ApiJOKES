@@ -16,8 +16,9 @@ let lat: number
 let temperature: HTMLElement | null = document.querySelector(".temp")
 let summary: HTMLElement | null = document.querySelector(".summary")
 let loc: HTMLElement | null = document.querySelector(".location")
+let weatherIcon:  HTMLImageElement | null = document.querySelector("#weather-icon")
 
-const kelvin: number = 273.15
+
 
 // API Weather
 window.addEventListener("load", () => {
@@ -29,7 +30,7 @@ window.addEventListener("load", () => {
 
             // ID API
             const api_id = "d745881a8a1897a666f58641b5a627d2"
-            const url_base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_id}`
+            const url_base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${api_id}`
 
             fetch(url_base)
                 .then(res => {
@@ -40,10 +41,23 @@ window.addEventListener("load", () => {
                 })
                 .then(data => {                  
 
-                    if (temperature && summary && loc) {
-                        temperature.textContent = Math.floor(data.main.temp - kelvin) + "°C"
+                    if (temperature && summary && loc && weatherIcon) {
+                        temperature.textContent = Math.floor(data.main.temp) + "°C"
                         summary.textContent = data.weather[0].description
-                        loc.textContent = data.name + ", " + data.sys.country
+                        loc.textContent = data.name + ", " + data.sys.country  
+                        
+
+                        //icono del tiempo
+                        
+                        let iconCode = data.weather[0].icon
+                        let urlIcono = `https://openweathermap.org/img/wn/${iconCode}.png`   
+
+                        weatherIcon.src = urlIcono                        
+                       
+                        weatherIcon.alt = data.weather[0].description                      
+                    
+                    } else {
+                        console.error("Uno o más elementos del DOM no se encontraron.")
                     }
                 })
                 .catch(error => {
@@ -157,3 +171,28 @@ if (nextButton) {
 
 // Lee el primer chiste al cargar la página
 readJoke()
+
+
+// //para iconos externos estáticos
+
+// // Asegúrate de que el elemento con el id 'weather-icon' existe
+// const weatherIconDiv = document.getElementById('weather-icon') as HTMLDivElement | null;
+
+// if (weatherIconDiv) {
+//     console.log(data.weather[0].icon);
+    
+//     let iconCode = data.weather[0].icon;
+//     const urlIcono = `https://openweathermap.org/img/wn/${iconCode}.png`;
+//     console.log(urlIcono);
+    
+//     // Crea un elemento de imagen y establece su src a la URL del ícono
+//     const weatherIcon = document.createElement('img');
+//     weatherIcon.src = urlIcono;
+//     weatherIcon.alt = data.weather[0].description; // Opcional: establece el texto alternativo
+    
+//     // Limpia el contenido anterior de weatherIconDiv y agrega el ícono
+//     weatherIconDiv.innerHTML = '';
+//     weatherIconDiv.appendChild(weatherIcon);
+// } else {
+//     console.error("El elemento con id 'weather-icon' no se encontró en el DOM.");
+// }
