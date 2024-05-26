@@ -1,10 +1,39 @@
 .card {
-  max-height: 580px !important;
-  padding-top: 1.5rem!important;
+  height: 90vh;
+  min-height: 40rem;
 }
-.color {
-    background-color:#FFB02E;
-    border: 1px solid black;
+  
+  .caja2 {
+      height: 70vh;
+      width: 100%;    
+      background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M906.5 632q-91.5 132-206 244.5t-241.5 14Q332 792 185 730T46 503q8-165 131.5-256.5t258.5-119Q571 100 661 195t213.5 200q123.5 105 32 237Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%23c157ed%22 d=%22M906.5 632q-91.5 132-206 244.5t-241.5 14Q332 792 185 730T46 503q8-165 131.5-256.5t258.5-119Q571 100 661 195t213.5 200q123.5 105 32 237Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-size: contain; 
+      background-position: center;        
+  }
+    
+  .caja4 {
+   
+    width: 25rem;
+    height: 30rem;   
+  }
+
+  .up {
+   height: 4.5rem; 
+   position: relative; 
+   left: 12rem; 
+   top: 4rem;
+  }
+
+  .down {
+    height: 5.5rem; 
+    position: relative; 
+    right: 11rem; 
+    bottom: 2rem;
+  }
+
+  .color {
+    background-color:#FFB02E;    
     height: 2.4rem;
     border-radius: 1.2rem;    
 }
@@ -21,51 +50,11 @@
   transform: scale(2.2)
 }
 
-
 .btn:hover{
     background-color:#FFB02E;
-    border: 1px solid black;
+    border: 1px  black;
     transform: scale(1.1)
 }
-
-.alturafixed {
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 200px; 
-  margin-bottom: -10px;
-}
-
-.btn-info {
-    padding: 2px 8px;
-    color: white;
-}
-
-
-.magicpattern {   
-    width: 100%;    
-    min-height: 550px;  
-    background-size: cover;
-    background-position: center center;    
-    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M906.5 632q-91.5 132-206 244.5t-241.5 14Q332 792 185 730T46 503q8-165 131.5-256.5t258.5-119Q571 100 661 195t213.5 200q123.5 105 32 237Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%23c157ed%22 d=%22M906.5 632q-91.5 132-206 244.5t-241.5 14Q332 792 185 730T46 503q8-165 131.5-256.5t258.5-119Q571 100 661 195t213.5 200q123.5 105 32 237Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  }
-  
-   
-  .magicpatternDown {      
-    width: 50px;
-    min-height: 180px;   
-    background-size: cover;
-    background-position: center center;   
-    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M798.5 588Q676 676 588 699.5t-182 6Q312 688 304 594t7.5-180.5q15.5-86.5 102-212T632 156q132 80 210.5 212t-44 220Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%23c157ed%22 d=%22M798.5 588Q676 676 588 699.5t-182 6Q312 688 304 594t7.5-180.5q15.5-86.5 102-212T632 156q132 80 210.5 212t-44 220Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  }  
-
-
-  .magicpatternUp { 
-    width: 100%;
-    min-height: 200px;
-    background-size: cover;
-    background-position: center center;    
-    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M839 597q-72 97-145.5 184t-193 86.5q-119.5-.5-213-73T168.5 611q-25.5-111 6-217.5t104.5-228Q352 44 490.5 73T686 212.5q57 110.5 141 199T839 597Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%23c157ed%22 d=%22M839 597q-72 97-145.5 184t-193 86.5q-119.5-.5-213-73T168.5 611q-25.5-111 6-217.5t104.5-228Q352 44 490.5 73T686 212.5q57 110.5 141 199T839 597Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  }
-  
-
-
+  .alturafixed {    
+    height: 15vh;    
+  } 

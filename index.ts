@@ -21,13 +21,11 @@ let summary: HTMLElement | null = document.querySelector(".summary")
 let loc: HTMLElement | null = document.querySelector(".location")
 let weatherIcon:  HTMLImageElement | null = document.querySelector("#weather-icon")
 
-
-
 // API Weather
 window.addEventListener("load", () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position)
+            //console.log(position)
             lon = position.coords.longitude
             lat = position.coords.latitude
 
@@ -52,35 +50,35 @@ window.addEventListener("load", () => {
                         switch (data.weather[0].main) {
                             case 'Thunderstorm':
                               iconoAnimado.src='animated/thunder.svg'
-                              console.log('TORMENTA');
+                             
                               break;
                             case 'Drizzle':
                               iconoAnimado.src='animated/rainy-2.svg'
-                              console.log('LLOVIZNA');
+                              
                               break;
                             case 'Rain':
                               iconoAnimado.src='animated/rainy-7.svg'
-                              console.log('LLUVIA');
+                              
                               break;
                             case 'Snow':
                               iconoAnimado.src='animated/snowy-6.svg'
-                                console.log('NIEVE');
+                               
                               break;                        
                             case 'Clear':
                                 iconoAnimado.src='animated/day.svg'
-                                console.log('LIMPIO');
+                               
                               break;
                             case 'Atmosphere':
                               iconoAnimado.src='animated/weather.svg'
-                                console.log('ATMOSFERA');
+                                
                                 break;  
                             case 'Clouds':
                                 iconoAnimado.src='animated/cloudy-day-1.svg'
-                                console.log('NUBES');
+                               
                                 break;  
                             default:
                               iconoAnimado.src='animated/cloudy-day-1.svg'
-                              console.log('por defecto');
+                              
                           }
 
                         
@@ -90,10 +88,10 @@ window.addEventListener("load", () => {
                     }
                 })
                 .catch(error => {
-                    console.error("Fetch error:", error)
+                    console.error("Fetch error", error)
                 })
         }, error => {
-            console.error("Geolocation error:", error)
+            console.error("Geolocation error", error)
         })
     } else {
         console.error("Geolocation is not supported by this browser.")
@@ -144,7 +142,6 @@ function displayJoke(joke: string) {
 // Función para los botones de puntuación
 function setupScoreButtons() {
     const scoreButtons = document.querySelectorAll(".score-button")
-
     scoreButtons.forEach(button => {
         button.removeEventListener("click", handleScoreButtonClick)
         button.addEventListener("click", handleScoreButtonClick)
@@ -154,7 +151,7 @@ function setupScoreButtons() {
 // Maneja el clic en los botones de puntuación
 function handleScoreButtonClick(event: Event) {
     const button = event.target as HTMLButtonElement
-    const score = parseInt(button.textContent!)
+    const score = parseInt(button.value)  // Cambiado para usar button.value
     saveJokeScore(score)
 }
 
@@ -200,28 +197,3 @@ if (nextButton) {
 
 // Lee el primer chiste al cargar la página
 readJoke()
-
-
-// //para iconos externos estáticos
-
-// // Asegúrate de que el elemento con el id 'weather-icon' existe
-// const weatherIconDiv = document.getElementById('weather-icon') as HTMLDivElement | null;
-
-// if (weatherIconDiv) {
-//     console.log(data.weather[0].icon);
-    
-//     let iconCode = data.weather[0].icon;
-//     const urlIcono = `https://openweathermap.org/img/wn/${iconCode}.png`;
-//     console.log(urlIcono);
-    
-//     // Crea un elemento de imagen y establece su src a la URL del ícono
-//     const weatherIcon = document.createElement('img');
-//     weatherIcon.src = urlIcono;
-//     weatherIcon.alt = data.weather[0].description; // Opcional: establece el texto alternativo
-    
-//     // Limpia el contenido anterior de weatherIconDiv y agrega el ícono
-//     weatherIconDiv.innerHTML = '';
-//     weatherIconDiv.appendChild(weatherIcon);
-// } else {
-//     console.error("El elemento con id 'weather-icon' no se encontró en el DOM.");
-// }
